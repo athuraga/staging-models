@@ -1,0 +1,16 @@
+<VirtualHost *:80>
+    ServerAdmin abhi@athuraga.live
+    ServerName skooter.athuraga.live
+    ServerAlias www.skooter.athuraga.live
+    DocumentRoot /var/www/html/skooter.athuraga.live/
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+<Directory /var/www/html/skooter.athuraga.live/>
+        Options -Indexes +IncludesNOEXEC +FollowSymLinks +ExecCGI
+        Allow from all
+        AllowOverride All
+</Directory>
+        RewriteEngine on
+</VirtualHost>
+
+
