@@ -1,8 +1,11 @@
 import * as THREE from 'three'
 import { useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, applyProps, useFrame } from '@react-three/fiber'
-import { PerformanceMonitor, AccumulativeShadows, RandomizedLight, Environment, Lightformer, OrbitControls, Float, useGLTF } from '@react-three/drei'
+import { PerformanceMonitor, AccumulativeShadows, RandomizedLight, Environment, Lightformer, Float, useGLTF } from '@react-three/drei'
 import { LayerMaterial, Color, Depth } from 'lamina'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
 
 export function App() {
   const [degraded, degrade] = useState(true)
@@ -36,9 +39,8 @@ Source: https://sketchfab.com/3d-models/free-porsche-911-carrera-4s-d01b25448379
 Title: (FREE) Porsche 911 Carrera 4S
 */
 function Porsche(props) {
-  const { scene, nodes, materials } = useGLTF('/WBROrg.glb')
+  const { scene, nodes, materials } = useGLTF('/WBR-comp.glb', { useDraco: true, useMeshopt: true })
   // const { } = useGLTF('/wbr1.glb')
-
   useLayoutEffect(() => {
     Object.values(nodes).forEach((node) => node.isMesh && (node.receiveShadow = node.castShadow = true))
   }, [nodes, materials])
@@ -84,5 +86,7 @@ function Lightformers({ positions = [2, 0, 2, 0, 2, 0, 2, 0] }) {
         </LayerMaterial>
       </mesh>
     </>
-  )
+  );
 }
+
+export default App;
