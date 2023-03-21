@@ -12,9 +12,9 @@ export function App() {
   return (
     <Canvas shadows camera={{ position: [5, 0, 15], fov: 10 }}>
       
-      <spotLight position={[0, 15, 0]} angle={0.3} penumbra={1} castShadow intensity={2} shadow-bias={-0.0001} />
-      <ambientLight intensity={0.5} />
-      <Porsche scale={1.6} position={[0, -0.9, 0]} rotation={[0, 30, 0]} />
+      <spotLight position={[0, 8, 0]} angle={0.3} penumbra={1} castShadow intensity={2} shadow-bias={-0.0001} />
+      <ambientLight intensity={0.35} />
+      <Porsche scale={1.2} position={[0.2, -0.91, 0]} rotation={[0, 125, 0]} />
       <AccumulativeShadows position={[0, -0.9, 0]} frames={100} alphaTest={0.9} scale={30}>
         <RandomizedLight amount={4} radius={12} ambient={1.5} position={[1, 5, -1]} />
       </AccumulativeShadows>
@@ -61,7 +61,7 @@ function Lightformers({ positions = [2, 0, 2, 0, 2, 0, 2, 0] }) {
   return (
     <>
       {/* Ceiling */}
-      <Lightformer intensity={0.75} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={[10, 10, 1]} />
+      <Lightformer intensity={0.75} rotation-x={Math.PI / 2} position={[0.2, 2, 0]} scale={[10, 10, 1]} />
       <group rotation={[0, 0.5, 0]}>
         <group ref={group}>
           {positions.map((x, i) => (
@@ -70,19 +70,19 @@ function Lightformers({ positions = [2, 0, 2, 0, 2, 0, 2, 0] }) {
         </group>
       </group>
       {/* Sides */}
-      <Lightformer intensity={4} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={[20, 0.1, 1]} />
-      <Lightformer rotation-y={Math.PI / 2} position={[-5, -1, -1]} scale={[20, 0.5, 1]} />
-      <Lightformer rotation-y={-Math.PI / 2} position={[10, 1, 0]} scale={[20, 1, 1]} />
+      <Lightformer intensity={4} rotation-y={Math.PI / 2} position={[0.2, 1, -1]} scale={[20, 0.1, 1]} />
+      <Lightformer rotation-y={Math.PI / 2} position={[0.2, -1, -1]} scale={[20, 0.5, 1]} />
+      <Lightformer rotation-y={-Math.PI / 2} position={[0.4, 1, 0]} scale={[20, 1, 1]} />
       {/* Accent (red) */}
       <Float speed={5} floatIntensity={2} rotationIntensity={2}>
-        <Lightformer form="ring" color="silver" intensity={1} scale={10} position={[-15, 4, -18]} target={[0, 0, 0]} />
+        <Lightformer form="ring" color="silver" intensity={3} scale={10} position={[1, 1, -4]} target={[0, 0, 0]} />
       </Float>
       {/* Background */}
       <mesh scale={100}>
         <sphereGeometry args={[1, 64, 64]} />
         <LayerMaterial side={THREE.BackSide}>
-          <Color color="#293944" alpha={1} mode="normal" />
-          <Depth colorA="silver" colorB="#" alpha={0.5} mode="normal" near={0} far={300} origin={[100, 100, 100]} />
+          <Color color="#000000" alpha={1} mode="normal" />
+          <Depth colorA="#000000" colorB="#000000" alpha={0.5} mode="normal" near={0} far={300} origin={[100, 100, 100]} />
         </LayerMaterial>
       </mesh>
     </>
