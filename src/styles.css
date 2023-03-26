@@ -15,8 +15,8 @@ body,
 }
 
 body {
-  background: black;
-  color: white;
+  background: #4f4f4f;
+  color: black;
   font-family: 'Inter';
 }
 
@@ -26,12 +26,12 @@ a {
 
 a {
   pointer-events: all;
-  color: white;
+  color: black;
   text-decoration: none;
 }
 
 svg {
-  fill: white;
+  fill: black;
 }
 
 @keyframes fade-in {
