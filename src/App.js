@@ -1,18 +1,50 @@
-import { Canvas } from '@react-three/fiber'
-import { Stage, OrbitControls } from '@react-three/drei'
-import { useControls } from 'leva'
-import { Model } from './Datsun'
+import React, { useState, useEffect } from "react";
+import Preloader from "../src/components/Pre";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home/Home";
+import About from "./components/About/About";
+import Projects from "./components/Projects/Projects";
+import Footer from "./components/Footer";
+import Resume from "./components/Resume/ResumeNew";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate
+} from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
+import "./style.css";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function App() {
-  const { color } = useControls({ color: '#4f4f4f' })
+function App() {
+  const [load, upadateLoad] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      upadateLoad(false);
+    }, 1200);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="container" style={{ background: color }}>
-      <Canvas shadows camera={{ position: [4, 0, -12], fov: 35 }}>
-        <Stage intensity={1.5} environment="city" shadows={{ type: 'accumulative', color, colorBlend: 2, opacity: 2 }} adjustCamera={0.9}>
-          <Model color={color} />
-        </Stage>
-        <OrbitControls makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
-      </Canvas>
-    </div>
-  )
+    <Router>
+      <Preloader load={load} />
+      <div className="App" id={load ? "no-scroll" : "scroll"}>
+        <Navbar />
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* <Route path="/project" element={<Projects />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/resume" element={<Resume />} />
+          <Route path="*" element={<Navigate to="/"/>} /> */}
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
+  );
 }
+
+export default App;
